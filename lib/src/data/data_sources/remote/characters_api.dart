@@ -12,7 +12,7 @@ abstract class CharactersApiService {
   @GET('/character')
   Future<HttpResponse<dynamic>> getCharacters(
     @Query('page') int page,
-    @Queries() Map<String, String> options,
+    @Queries() Map<String, String>? options,
   );
 
   @GET('/character/{id}')

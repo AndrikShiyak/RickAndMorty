@@ -12,9 +12,7 @@ class _CharactersApiService implements CharactersApiService {
   _CharactersApiService(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://rickandmortyapi.com/api';
-  }
+  });
 
   final Dio _dio;
 
@@ -27,7 +25,8 @@ class _CharactersApiService implements CharactersApiService {
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
-    queryParameters.addAll(options);
+    queryParameters.addAll(options ?? <String, dynamic>{});
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result =
