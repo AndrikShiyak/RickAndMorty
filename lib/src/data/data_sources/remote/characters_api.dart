@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:rick_and_morty_clean_practice/src/core/utils/constants.dart';
 
 part 'characters_api.g.dart';
 
-@RestApi(baseUrl: kBaseUrl)
+// @RestApi(baseUrl: kBaseUrl)
+@RestApi()
 abstract class CharactersApiService {
   factory CharactersApiService(Dio dio, {String baseUrl}) =
       _CharactersApiService;
