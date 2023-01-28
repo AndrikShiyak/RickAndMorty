@@ -10,7 +10,7 @@ import 'package:rick_and_morty_clean_practice/src/presentation/blocs/remote_char
 
 import 'data/data_sources/remote/characters_api.dart';
 
-final GetIt injector = GetIt.instance();
+final GetIt injector = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   //Dio
