@@ -6,7 +6,7 @@ class LocationModel extends Location {
     required super.url,
   });
 
-  factory LocationModel.fromMap(Map<String, dynamic> map) {
+  factory LocationModel.fromJson(Map<String, dynamic> map) {
     return LocationModel(
       name: map['name'] as String,
       url: map['url'] as String,

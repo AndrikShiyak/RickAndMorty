@@ -11,16 +11,7 @@ class PageInfoModel {
     this.prev,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'count': count,
-      'pages': pages,
-      'next': next,
-      'prev': prev,
-    };
-  }
-
-  factory PageInfoModel.fromMap(Map<String, dynamic> map) {
+  factory PageInfoModel.fromJson(Map<String, dynamic> map) {
     return PageInfoModel(
       count: map['count'] as int,
       pages: map['pages'] as int,

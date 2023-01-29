@@ -6,6 +6,7 @@ import 'package:rick_and_morty_clean_practice/src/core/params/get_characters_par
 import 'package:rick_and_morty_clean_practice/src/core/params/get_character_params.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/repositories/characters_repository.dart';
 
+import '../../domain/entities/character.dart';
 import '../data_sources/remote/characters_api.dart';
 
 class CharactersRepositoryImpl implements CharactersRepository {
@@ -14,13 +15,13 @@ class CharactersRepositoryImpl implements CharactersRepository {
   CharactersRepositoryImpl(this._charactersApiService);
 
   @override
-  Future<DataState<dynamic>> getCharacter(GetCharacterParams params) async {
+  Future<DataState<Character>> getCharacter(GetCharacterParams params) async {
     try {
       final httpResponse =
           await _charactersApiService.getCharacter(params.characterId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.response.data);
+        return DataSuccess(httpResponse.data);
       }
       return DataFailed(
         DioError(
@@ -36,7 +37,8 @@ class CharactersRepositoryImpl implements CharactersRepository {
   }
 
   @override
-  Future<DataState<dynamic>> getCharacters(GetCharactersParams params) async {
+  Future<DataState<List<Character>>> getCharacters(
+      GetCharactersParams params) async {
     try {
       final httpResponse = await _charactersApiService.getCharacters(
         params.page,
@@ -44,7 +46,7 @@ class CharactersRepositoryImpl implements CharactersRepository {
       );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
+        return DataSuccess(httpResponse.data.characterInfo);
       }
       return DataFailed(
         DioError(

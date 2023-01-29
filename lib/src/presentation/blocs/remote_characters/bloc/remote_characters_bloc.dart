@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rick_and_morty_clean_practice/src/core/params/get_characters_params.dart';
 import 'package:rick_and_morty_clean_practice/src/core/resources/data_state.dart';
+import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_characters_usecase.dart';
 
 import '../../../../core/params/get_character_params.dart';
@@ -24,7 +25,8 @@ class RemoteCharactersBloc
     on<GetCharacter>(_getCharacter);
   }
 
-  final dynamic _characters = [];
+  final List<Character> _characters = [];
+  Character? _character;
   int _page = 1;
   static const int _pageSize = 20;
 
@@ -33,14 +35,14 @@ class RemoteCharactersBloc
     final dataState = await _getCharactersUseCase.call(
         params: GetCharactersParams(_page, null));
 
-    if (dataState is DataSuccess && (dataState.data as List).isNotEmpty) {
+    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
       final characters = dataState.data;
-      final noMoreData = characters.length < _pageSize;
+      final noMoreData = characters!.length < _pageSize;
       _characters.addAll(characters);
       _page++;
 
       emit(RemoteCharactersDone(
-        characters,
+        characters: characters,
         noMoreData: noMoreData,
       ));
     }
@@ -55,16 +57,11 @@ class RemoteCharactersBloc
     final dataState = await _getCharacterUseCase.call(
         params: GetCharacterParams(event.character.id));
 
-    if (dataState is DataSuccess && (dataState.data as List).isNotEmpty) {
-      final characters = dataState.data;
-      final noMoreData = characters.length < _pageSize;
-      _characters.addAll(characters);
-      _page++;
+    if (dataState is DataSuccess) {
+      final character = dataState.data;
+      _character = character;
 
-      emit(RemoteCharactersDone(
-        characters,
-        noMoreData: noMoreData,
-      ));
+      emit(RemoteCharactersDone(character: _character!));
     }
 
     if (dataState is DataFailed) {

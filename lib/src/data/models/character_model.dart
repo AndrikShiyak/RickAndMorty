@@ -18,7 +18,7 @@ class CharacterModel extends Character {
     required super.created,
   });
 
-  factory CharacterModel.fromMap(Map<String, dynamic> map) {
+  factory CharacterModel.fromJson(Map<String, dynamic> map) {
     return CharacterModel(
       id: map['id'] as int,
       name: map['name'] as String,
@@ -26,10 +26,10 @@ class CharacterModel extends Character {
       species: map['species'] as String,
       type: map['type'] as String,
       gender: map['gender'] as String,
-      origin: OriginModel.fromMap(map['origin'] as Map<String, dynamic>),
-      location: LocationModel.fromMap(map['location'] as Map<String, dynamic>),
+      origin: OriginModel.fromJson(map['origin'] as Map<String, dynamic>),
+      location: LocationModel.fromJson(map['location'] as Map<String, dynamic>),
       image: map['image'] as String,
-      episode: List<String>.from((map['episode'] as List<String>)),
+      episode: List<String>.from((map['episode'] as List<dynamic>)),
       url: map['url'] as String,
       created: map['created'] as String,
     );

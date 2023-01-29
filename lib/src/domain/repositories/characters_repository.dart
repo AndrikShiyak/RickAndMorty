@@ -1,9 +1,10 @@
 import '../../core/params/get_character_params.dart';
 import '../../core/params/get_characters_params.dart';
 import '../../core/resources/data_state.dart';
+import '../entities/character.dart';
 
 abstract class CharactersRepository {
-  Future<DataState<dynamic>> getCharacters(GetCharactersParams params);
+  Future<DataState<List<Character>>> getCharacters(GetCharactersParams params);
 
-  Future<DataState<dynamic>> getCharacter(GetCharacterParams params);
+  Future<DataState<Character>> getCharacter(GetCharacterParams params);
 }

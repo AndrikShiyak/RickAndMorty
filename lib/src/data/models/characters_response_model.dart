@@ -11,12 +11,12 @@ class CharactersResponseModel {
     required this.characterInfo,
   });
 
-  factory CharactersResponseModel.fromMap(Map<String, dynamic> map) {
+  factory CharactersResponseModel.fromJson(Map<String, dynamic> map) {
     return CharactersResponseModel(
-      pageInfo: PageInfoModel.fromMap(map['pageInfo'] as Map<String, dynamic>),
+      pageInfo: PageInfoModel.fromJson(map['info'] as Map<String, dynamic>),
       characterInfo: List<CharacterModel>.from(
-        (map['characterInfo'] as List<int>).map<CharacterModel>(
-          (x) => CharacterModel.fromMap(x as Map<String, dynamic>),
+        (map['results'] as List<dynamic>).map<CharacterModel>(
+          (x) => CharacterModel.fromJson(x as Map<String, dynamic>),
         ),
       ),
     );

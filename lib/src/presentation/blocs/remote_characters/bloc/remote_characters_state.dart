@@ -1,12 +1,14 @@
 part of 'remote_characters_bloc.dart';
 
 abstract class RemoteCharactersState extends Equatable {
-  final dynamic characters;
+  final List<Character>? characters;
+  final Character? character;
   final bool noMoreData;
   final DioError? error;
 
   const RemoteCharactersState({
     this.characters,
+    this.character,
     this.noMoreData = false,
     this.error,
   });
@@ -20,9 +22,13 @@ class RemoteCharactersLoading extends RemoteCharactersState {
 }
 
 class RemoteCharactersDone extends RemoteCharactersState {
-  const RemoteCharactersDone(dynamic characters, {bool noMoreData = false})
+  const RemoteCharactersDone(
+      {List<Character>? characters,
+      Character? character,
+      bool noMoreData = false})
       : super(
           characters: characters,
+          character: character,
           noMoreData: noMoreData,
         );
 }

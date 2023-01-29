@@ -19,7 +19,7 @@ class _CharactersApiService implements CharactersApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> getCharacters(
+  Future<HttpResponse<CharactersResponseModel>> getCharacters(
     page,
     options,
   ) async {
@@ -29,8 +29,8 @@ class _CharactersApiService implements CharactersApiService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<CharactersResponseModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -42,19 +42,19 @@ class _CharactersApiService implements CharactersApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final value = CharactersResponseModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<dynamic>> getCharacter(id) async {
+  Future<HttpResponse<CharacterModel>> getCharacter(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<CharacterModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -66,7 +66,7 @@ class _CharactersApiService implements CharactersApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final value = CharacterModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
