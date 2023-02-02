@@ -1,12 +1,12 @@
 part of 'remote_characters_bloc.dart';
 
 abstract class RemoteCharactersEvent extends Equatable {
-  final dynamic character;
+  final Character? character;
 
   const RemoteCharactersEvent({this.character});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [character];
 }
 
 class GetCharacters extends RemoteCharactersEvent {
@@ -14,5 +14,5 @@ class GetCharacters extends RemoteCharactersEvent {
 }
 
 class GetCharacter extends RemoteCharactersEvent {
-  const GetCharacter(dynamic character) : super(character: character);
+  const GetCharacter(Character character) : super(character: character);
 }
