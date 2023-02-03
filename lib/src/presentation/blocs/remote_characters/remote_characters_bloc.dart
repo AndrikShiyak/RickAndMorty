@@ -4,7 +4,8 @@ import 'package:rick_and_morty_clean_practice/src/core/params/get_characters_par
 import 'package:rick_and_morty_clean_practice/src/core/resources/data_state.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_characters_usecase.dart';
-import '../../../../domain/usecases/get_character_usecase.dart';
+
+import '../../../domain/usecases/get_character_usecase.dart';
 
 part 'remote_characters_event.dart';
 part 'remote_characters_state.dart';

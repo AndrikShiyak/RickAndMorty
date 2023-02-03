@@ -6,9 +6,9 @@ import 'package:rick_and_morty_clean_practice/src/data/repositories/characters_r
 import 'package:rick_and_morty_clean_practice/src/domain/repositories/characters_repository.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_character_usecase.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_characters_usecase.dart';
-import 'package:rick_and_morty_clean_practice/src/presentation/blocs/remote_characters/bloc/remote_characters_bloc.dart';
 
 import 'data/data_sources/remote/characters_api.dart';
+import 'presentation/blocs/remote_characters/remote_characters_bloc.dart';
 
 final GetIt injector = GetIt.instance;
 

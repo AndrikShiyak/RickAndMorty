@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty_clean_practice/src/config/routes/app_routes.dart';
 import 'package:rick_and_morty_clean_practice/src/config/themes/app_theme.dart';
 import 'package:rick_and_morty_clean_practice/src/injector.dart';
-import 'package:rick_and_morty_clean_practice/src/presentation/blocs/remote_characters/bloc/remote_characters_bloc.dart';
 
 import 'src/core/utils/app_bloc_observer.dart';
 import 'src/core/utils/constants.dart';
+import 'src/presentation/blocs/remote_characters/remote_characters_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
