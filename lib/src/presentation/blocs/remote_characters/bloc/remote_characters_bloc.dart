@@ -20,22 +20,17 @@ class RemoteCharactersBloc
     // on<GetCharacter>(_getCharacter);
   }
 
-  final List<Character> _characters = [];
-  Character? _character;
   int _page = 1;
   static const int _pageSize = 20;
 
   void _getCharacters(
       GetCharacters event, Emitter<RemoteCharactersState> emit) async {
-    // await runBlocProcess(
-    //   () async {
     final dataState = await _getCharactersUseCase.call(
         params: GetCharactersParams(_page, null));
 
     if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
       final characters = dataState.data;
       final noMoreData = characters!.length < _pageSize;
-      // _characters.addAll(characters);
       _page++;
 
       emit(
@@ -45,51 +40,14 @@ class RemoteCharactersBloc
           noMoreData: noMoreData,
         ),
       );
-
-      // emit(
-      //   RemoteCharactersDone(
-      //       characters: List.from(state.characters ?? [])..addAll(characters)),
-      // );
     }
 
     if (dataState is DataFailed) {
-      // emit(
-      //   RemoteCharactersError(),
-      // );
-
       emit(state.copyWith(
         status: CharactersStatus.error,
       ));
     }
   }
-
-  // void _getCharacters(
-  //     GetCharacters event, Emitter<RemoteCharactersState> emit) async {
-  //   await runBlocProcess(
-  //     () async {
-  //       final dataState = await _getCharactersUseCase.call(
-  //           params: GetCharactersParams(_page, null));
-
-  //       if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
-  //         final characters = dataState.data;
-  //         final noMoreData = characters!.length < _pageSize;
-  //         _characters.addAll(characters);
-  //         _page++;
-
-  //         emit(RemoteCharactersDone(
-  //           characters: _characters,
-  //           noMoreData: noMoreData,
-  //         ));
-
-  //         print('askdnaskdkajs ${state.characters?.length}');
-  //       }
-
-  //       if (dataState is DataFailed) {
-  //         emit(RemoteCharactersError(dataState.error!));
-  //       }
-  //     },
-  //   );
-  // }
 
   // FutureOr<void> _getCharacter(
   //     GetCharacter event, Emitter<RemoteCharactersState> emit) async {
