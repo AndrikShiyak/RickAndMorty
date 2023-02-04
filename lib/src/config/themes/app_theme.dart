@@ -6,6 +6,7 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         elevation: 0,
         color: Colors.white,
+        foregroundColor: Colors.black,
       ),
       scaffoldBackgroundColor: const Color.fromARGB(255, 243, 243, 243),
       primaryColor: Colors.black,

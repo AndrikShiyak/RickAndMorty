@@ -6,7 +6,6 @@ import 'package:rick_and_morty_clean_practice/src/injector.dart';
 
 import 'src/core/utils/app_bloc_observer.dart';
 import 'src/core/utils/constants.dart';
-import 'src/presentation/blocs/remote_characters/remote_characters_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,15 +22,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RemoteCharactersBloc>(
-      lazy: false,
-      create: (_) => injector()..add(const GetCharacters()),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: kMaterialAppTitle,
-        theme: AppTheme.light,
-        onGenerateRoute: AppRoutes.onGenerateRoutes,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: kMaterialAppTitle,
+      theme: AppTheme.light,
+      onGenerateRoute: AppRouter.onGenerateRoutes,
     );
   }
 }

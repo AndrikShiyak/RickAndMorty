@@ -8,7 +8,8 @@ import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_character_
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_characters_usecase.dart';
 
 import 'data/data_sources/remote/characters_api.dart';
-import 'presentation/blocs/remote_characters/remote_characters_bloc.dart';
+import 'presentation/blocs/remote_character_details/remote_character_details_bloc.dart';
+import 'presentation/blocs/remote_characters_list/remote_characters_list_bloc.dart';
 
 final GetIt injector = GetIt.instance;
 
@@ -35,9 +36,14 @@ Future<void> initializeDependencies() async {
 
   //Blocs
 
-  injector.registerFactory<RemoteCharactersBloc>(
-    () => RemoteCharactersBloc(
+  injector.registerFactory<RemoteCharactersListBloc>(
+    () => RemoteCharactersListBloc(
       injector(),
+      injector(),
+    ),
+  );
+  injector.registerFactory<RemoteCharacterDetailsBloc>(
+    () => RemoteCharacterDetailsBloc(
       injector(),
     ),
   );
