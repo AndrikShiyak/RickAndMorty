@@ -32,6 +32,16 @@ class Character extends Equatable {
     required this.created,
   });
 
+  Map<String, String> get infoMap => {
+        'Name: ': name,
+        'Species: ': species,
+        'Gender: ': gender,
+        'Status: ': status,
+        'Type: ': type,
+        'Origin: ': origin.name,
+        'Location: ': location.name,
+      };
+
   @override
   List<Object?> get props => [
         id,

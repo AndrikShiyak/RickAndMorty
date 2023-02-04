@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
 
 import '../../config/routes/app_routes.dart';
+import 'cached_network_image_widget.dart';
 
 class CharacterCard extends HookWidget {
   const CharacterCard({
@@ -23,8 +24,8 @@ class CharacterCard extends HookWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                character.image,
+              CachedNetworkImageWidget(
+                imageUrl: character.image,
                 width: 200,
               ),
               const SizedBox(width: 10),
