@@ -28,7 +28,7 @@ class AppTheme {
         // overline: TextStyle(fontSize: 30),
       ),
       cardTheme: const CardTheme(
-        color: Colors.yellow,
+        color: Color.fromARGB(255, 254, 243, 140),
         elevation: 10,
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(),

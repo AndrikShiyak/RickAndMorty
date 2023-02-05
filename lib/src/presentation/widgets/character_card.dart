@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
+import 'package:rick_and_morty_clean_practice/src/presentation/widgets/character_status_widget.dart';
 
 import '../../config/routes/app_routes.dart';
 import 'cached_network_image_widget.dart';
@@ -15,18 +16,18 @@ class CharacterCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _onTap(context, character.id),
-      child: Card(
+    return Card(
+      child: InkWell(
+        onTap: () => _onTap(context, character.id),
         child: SizedBox(
-          height: 200,
+          height: 100,
           width: double.infinity,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImageWidget(
                 imageUrl: character.image,
-                width: 200,
+                width: 100,
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -38,11 +39,19 @@ class CharacterCard extends HookWidget {
                     children: [
                       Text(
                         character.name,
-                        maxLines: 3,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 10),
-                      Text(character.status),
+                      Text(character.species),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          CharacterStatusWidget(status: character.status),
+                          const SizedBox(width: 10),
+                          Text(character.status),
+                        ],
+                      ),
                     ],
                   ),
                 ),
