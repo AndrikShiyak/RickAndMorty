@@ -4,9 +4,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rick_and_morty_clean_practice/src/injector.dart';
 import 'package:rick_and_morty_clean_practice/src/presentation/blocs/remote_character_details/remote_character_details_bloc.dart';
 import 'package:rick_and_morty_clean_practice/src/presentation/pages/state_page.dart';
-import '../../domain/entities/character.dart';
-import '../widgets/cached_network_image_widget.dart';
-import '../widgets/key_value_widget.dart';
+
+import '../../../domain/entities/character.dart';
+import '../../widgets/cached_network_image_widget.dart';
+import '../../widgets/key_value_widget.dart';
 
 class CharacterDetailsPage extends HookWidget {
   const CharacterDetailsPage({

@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
 import 'package:rick_and_morty_clean_practice/src/presentation/widgets/character_status_widget.dart';
-
-import '../../config/routes/app_routes.dart';
 import 'cached_network_image_widget.dart';
 
-class CharacterCard extends HookWidget {
-  const CharacterCard({
+class CardWidget extends HookWidget {
+  const CardWidget({
     super.key,
     required this.character,
+    required this.onTap,
   });
 
   final Character character;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () => _onTap(context, character.id),
+        onTap: onTap,
         child: SizedBox(
           height: 100,
           width: double.infinity,
@@ -62,7 +62,4 @@ class CharacterCard extends HookWidget {
       ),
     );
   }
-
-  void _onTap(BuildContext context, int characterId) => Navigator.of(context)
-      .pushNamed(AppRoutes.characterDetails, arguments: characterId);
 }

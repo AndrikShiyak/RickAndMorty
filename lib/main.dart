@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty_clean_practice/src/config/routes/app_routes.dart';
 import 'package:rick_and_morty_clean_practice/src/config/themes/app_theme.dart';
 import 'package:rick_and_morty_clean_practice/src/injector.dart';
+import 'package:rick_and_morty_clean_practice/src/presentation/pages/home_page.dart';
 
 import 'src/core/utils/app_bloc_observer.dart';
 import 'src/core/utils/constants.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: kMaterialAppTitle,
       theme: AppTheme.light,
-      onGenerateRoute: AppRouter.onGenerateRoutes,
+      home: const HomePage(),
     );
   }
 }

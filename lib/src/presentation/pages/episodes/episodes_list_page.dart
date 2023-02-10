@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../injector.dart';
-import '../blocs/remote_characters_list/remote_characters_list_bloc.dart';
-import '../widgets/character_card.dart';
 
-class CharactersListPage extends StatelessWidget {
-  const CharactersListPage({
+import '../../../config/routes/app_routes.dart';
+import '../../../injector.dart';
+import '../../blocs/remote_characters_list/remote_characters_list_bloc.dart';
+import '../../widgets/card_widget.dart';
+
+class EpisodesListPage extends HookWidget {
+  const EpisodesListPage({
     super.key,
   });
 
@@ -16,13 +18,13 @@ class CharactersListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<RemoteCharactersListBloc>(
       create: (context) => injector()..add(const GetCharacters()),
-      child: const CharactersListView(),
+      child: const EpisodesListView(),
     );
   }
 }
 
-class CharactersListView extends HookWidget {
-  const CharactersListView({super.key});
+class EpisodesListView extends HookWidget {
+  const EpisodesListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +58,11 @@ class CharactersListView extends HookWidget {
                 ...List<Widget>.from(
                   state.characters!.map(
                     (e) => Builder(
-                      builder: (context) => CharacterCard(
+                      builder: (context) => CardWidget(
                         character: e,
+                        onTap: () => Navigator.of(context).pushNamed(
+                            AppRoutes.characterDetails,
+                            arguments: e.id),
                       ),
                     ),
                   ),

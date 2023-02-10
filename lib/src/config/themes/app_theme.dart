@@ -33,6 +33,11 @@ class AppTheme {
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(),
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 }
