@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_clean_practice/src/config/routes/tab_router.dart';
 import 'package:rick_and_morty_clean_practice/src/presentation/pages/settings/settings_page.dart';
+import 'app_routes.dart';
 
 class SettingsTabRouter extends TabRouter {
   final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
@@ -11,17 +12,11 @@ class SettingsTabRouter extends TabRouter {
   @override
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case _SettingsTabRoutes.settings:
+      case AppRoutes.root:
         return materialRoute(const SettingsPage());
 
       default:
         return null;
     }
   }
-}
-
-class _SettingsTabRoutes {
-  _SettingsTabRoutes._();
-
-  static const String settings = '/';
 }
