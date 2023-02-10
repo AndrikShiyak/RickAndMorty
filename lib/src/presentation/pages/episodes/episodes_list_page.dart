@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
-
-import '../../../config/routes/app_routes.dart';
 import '../../../injector.dart';
 import '../../blocs/remote_characters_list/remote_characters_list_bloc.dart';
-import '../../widgets/card_widget.dart';
+import '../../widgets/card_widget/character_card.dart';
 
 class EpisodesListPage extends HookWidget {
   const EpisodesListPage({
@@ -58,12 +56,7 @@ class EpisodesListView extends HookWidget {
                 ...List<Widget>.from(
                   state.characters!.map(
                     (e) => Builder(
-                      builder: (context) => CardWidget(
-                        character: e,
-                        onTap: () => Navigator.of(context).pushNamed(
-                            AppRoutes.characterDetails,
-                            arguments: e.id),
-                      ),
+                      builder: (context) => CharacterCard(character: e),
                     ),
                   ),
                 ),
