@@ -15,45 +15,44 @@ class HomePage extends HookWidget {
   }
 }
 
-class HomeView extends StatefulHookWidget {
+class HomeView extends HookWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  final CharactersTabRouter _charactersTabRouter = CharactersTabRouter();
-  final EpisodesTabRouter _episodesTabRouter = EpisodesTabRouter();
-  final LocationsTabRouter _locationsTabRouter = LocationsTabRouter();
-  final SettingsTabRouter _settingsTabRouter = SettingsTabRouter();
-
-  int _currentTabIndex = 0;
-
-  void _changeTab(int index) => setState(() {
-        _currentTabIndex = index;
-      });
-
-  @override
   Widget build(BuildContext context) {
+    final charactersTabRouter =
+        useMemoized<CharactersTabRouter>(() => CharactersTabRouter());
+    final episodesTabRouter =
+        useMemoized<EpisodesTabRouter>(() => EpisodesTabRouter());
+    final locationsTabRouter =
+        useMemoized<LocationsTabRouter>(() => LocationsTabRouter());
+    final settingsTabRouter =
+        useMemoized<SettingsTabRouter>(() => SettingsTabRouter());
+
+    final currentTabIndex = useState<int>(0);
+
+    final changeTab = useCallback((int index) {
+      currentTabIndex.value = index;
+    }, []);
+
     return Scaffold(
       body: Stack(
         children: [
           TabPage(
-            offstage: _currentTabIndex != 0,
-            router: _charactersTabRouter,
+            offstage: currentTabIndex.value != 0,
+            router: charactersTabRouter,
           ),
           TabPage(
-            offstage: _currentTabIndex != 1,
-            router: _episodesTabRouter,
+            offstage: currentTabIndex.value != 1,
+            router: episodesTabRouter,
           ),
           TabPage(
-            offstage: _currentTabIndex != 2,
-            router: _locationsTabRouter,
+            offstage: currentTabIndex.value != 2,
+            router: locationsTabRouter,
           ),
           TabPage(
-            offstage: _currentTabIndex != 3,
-            router: _settingsTabRouter,
+            offstage: currentTabIndex.value != 3,
+            router: settingsTabRouter,
           ),
         ],
       ),
@@ -68,8 +67,8 @@ class _HomeViewState extends State<HomeView> {
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
         ],
-        onTap: (int index) => _changeTab(index),
-        currentIndex: _currentTabIndex,
+        onTap: changeTab,
+        currentIndex: currentTabIndex.value,
       ),
     );
   }
