@@ -84,11 +84,11 @@ class EpisodesListView extends HookWidget {
       BuildContext context, ScrollController scrollController) {
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.position.pixels;
-    final remoteCharactersBloc =
-        BlocProvider.of<RemoteEpisodesListBloc>(context);
+    final remoteEpisodesBloc = BlocProvider.of<RemoteEpisodesListBloc>(context);
+    final noMoreData = remoteEpisodesBloc.state.noMoreData;
 
-    if (currentScroll == maxScroll) {
-      remoteCharactersBloc.add(const GetEpisodes());
+    if (currentScroll == maxScroll && !noMoreData) {
+      remoteEpisodesBloc.add(const GetEpisodes());
     }
   }
 }

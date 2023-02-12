@@ -86,8 +86,9 @@ class CharactersListView extends HookWidget {
     final currentScroll = scrollController.position.pixels;
     final remoteCharactersBloc =
         BlocProvider.of<RemoteCharactersListBloc>(context);
+    final noMoreData = remoteCharactersBloc.state.noMoreData;
 
-    if (currentScroll == maxScroll) {
+    if (currentScroll == maxScroll && !noMoreData) {
       remoteCharactersBloc.add(const GetCharacters());
     }
   }
