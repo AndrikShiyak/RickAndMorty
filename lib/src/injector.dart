@@ -6,8 +6,12 @@ import 'package:rick_and_morty_clean_practice/src/data/repositories/characters_r
 import 'package:rick_and_morty_clean_practice/src/domain/repositories/characters_repository.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_character_usecase.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_characters_usecase.dart';
-
-import 'data/data_sources/remote/characters_api.dart';
+import 'package:rick_and_morty_clean_practice/src/presentation/blocs/remote_episodes_list/remote_episodes_list_bloc.dart';
+import 'data/data_sources/remote/characters/characters_api.dart';
+import 'data/data_sources/remote/episodes/episodes_api.dart';
+import 'data/repositories/episodes_repository_impl.dart';
+import 'domain/repositories/episodes_repository.dart';
+import 'domain/usecases/get_episodes_usecase.dart';
 import 'presentation/blocs/remote_character_details/remote_character_details_bloc.dart';
 import 'presentation/blocs/remote_characters_list/remote_characters_list_bloc.dart';
 
@@ -21,11 +25,15 @@ Future<void> initializeDependencies() async {
 
   injector.registerSingleton<CharactersApiService>(
       CharactersApiService(injector()));
+  injector
+      .registerSingleton<EpisodesApiService>(EpisodesApiService(injector()));
 
   //Repositories
 
   injector.registerSingleton<CharactersRepository>(
       CharactersRepositoryImpl(injector()));
+  injector.registerSingleton<EpisodesRepository>(
+      EpisodesRepositoryImpl(injector()));
 
   //UseCases
 
@@ -34,16 +42,22 @@ Future<void> initializeDependencies() async {
   injector
       .registerSingleton<GetCharacterUseCase>(GetCharacterUseCase(injector()));
 
+  injector
+      .registerSingleton<GetEpisodesUseCase>(GetEpisodesUseCase(injector()));
+
   //Blocs
 
   injector.registerFactory<RemoteCharactersListBloc>(
-    () => RemoteCharactersListBloc(
-      injector(),
-      injector(),
-    ),
+    () => RemoteCharactersListBloc(injector()),
   );
   injector.registerFactory<RemoteCharacterDetailsBloc>(
     () => RemoteCharacterDetailsBloc(
+      injector(),
+    ),
+  );
+
+  injector.registerFactory<RemoteEpisodesListBloc>(
+    () => RemoteEpisodesListBloc(
       injector(),
     ),
   );

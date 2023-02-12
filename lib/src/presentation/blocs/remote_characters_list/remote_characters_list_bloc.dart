@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rick_and_morty_clean_practice/src/core/params/get_characters_params.dart';
 import 'package:rick_and_morty_clean_practice/src/core/resources/data_state.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/usecases/get_characters_usecase.dart';
-import '../../../domain/usecases/get_character_usecase.dart';
+import '../../../core/enums/view_state.dart';
+import '../../../core/params/characters/get_characters_params.dart';
 
 part 'remote_characters_list_event.dart';
 part 'remote_characters_list_state.dart';
@@ -12,10 +12,8 @@ part 'remote_characters_list_state.dart';
 class RemoteCharactersListBloc
     extends Bloc<RemoteCharactersListEvent, RemoteCharactersListState> {
   final GetCharactersUseCase _getCharactersUseCase;
-  final GetCharacterUseCase _getCharacterUseCase;
 
-  RemoteCharactersListBloc(
-      this._getCharactersUseCase, this._getCharacterUseCase)
+  RemoteCharactersListBloc(this._getCharactersUseCase)
       : super(const RemoteCharactersListState()) {
     on<GetCharacters>(_getCharacters);
   }
@@ -36,7 +34,7 @@ class RemoteCharactersListBloc
       emit(
         state.copyWith(
           characters: List.from(state.characters ?? [])..addAll(characters),
-          status: CharactersStatus.success,
+          status: ViewState.success,
           noMoreData: noMoreData,
         ),
       );
@@ -44,7 +42,7 @@ class RemoteCharactersListBloc
 
     if (dataState is DataFailed) {
       emit(state.copyWith(
-        status: CharactersStatus.error,
+        status: ViewState.error,
       ));
     }
   }

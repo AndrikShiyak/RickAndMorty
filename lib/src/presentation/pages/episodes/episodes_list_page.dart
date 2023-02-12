@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
+import '../../../core/enums/view_state.dart';
 import '../../../injector.dart';
-import '../../blocs/remote_characters_list/remote_characters_list_bloc.dart';
-import '../../widgets/card_widget/character_card.dart';
+import '../../blocs/remote_episodes_list/remote_episodes_list_bloc.dart';
+import '../../widgets/card_widget/episode_card.dart';
 
 class EpisodesListPage extends HookWidget {
   const EpisodesListPage({
@@ -14,8 +15,8 @@ class EpisodesListPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RemoteCharactersListBloc>(
-      create: (context) => injector()..add(const GetCharacters()),
+    return BlocProvider<RemoteEpisodesListBloc>(
+      create: (context) => injector()..add(const GetEpisodes()),
       child: const EpisodesListView(),
     );
   }
@@ -37,26 +38,26 @@ class EpisodesListView extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Characters',
+          'Episodes',
         ),
       ),
-      body: BlocBuilder<RemoteCharactersListBloc, RemoteCharactersListState>(
+      body: BlocBuilder<RemoteEpisodesListBloc, RemoteEpisodesListState>(
         builder: (_, state) {
-          if (state.status == CharactersStatus.loading) {
+          if (state.status == ViewState.loading) {
             return const Center(child: CupertinoActivityIndicator());
           }
-          if (state.status == CharactersStatus.error) {
+          if (state.status == ViewState.error) {
             return const Center(child: Icon(Ionicons.refresh));
           }
-          if (state.status == CharactersStatus.success) {
+          if (state.status == ViewState.success) {
             return ListView(
               controller: scrollController,
               children: [
                 // Items
                 ...List<Widget>.from(
-                  state.characters!.map(
+                  state.episodes!.map(
                     (e) => Builder(
-                      builder: (context) => CharacterCard(character: e),
+                      builder: (context) => EpisodeCard(episode: e),
                     ),
                   ),
                 ),
@@ -84,10 +85,10 @@ class EpisodesListView extends HookWidget {
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.position.pixels;
     final remoteCharactersBloc =
-        BlocProvider.of<RemoteCharactersListBloc>(context);
+        BlocProvider.of<RemoteEpisodesListBloc>(context);
 
     if (currentScroll == maxScroll) {
-      remoteCharactersBloc.add(const GetCharacters());
+      remoteCharactersBloc.add(const GetEpisodes());
     }
   }
 }

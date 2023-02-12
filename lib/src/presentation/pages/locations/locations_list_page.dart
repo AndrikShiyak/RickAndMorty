@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
+import '../../../core/enums/view_state.dart';
 import '../../../injector.dart';
 import '../../blocs/remote_characters_list/remote_characters_list_bloc.dart';
 import '../../widgets/card_widget/character_card.dart';
@@ -42,13 +43,13 @@ class LocationsListView extends HookWidget {
       ),
       body: BlocBuilder<RemoteCharactersListBloc, RemoteCharactersListState>(
         builder: (_, state) {
-          if (state.status == CharactersStatus.loading) {
+          if (state.status == ViewState.loading) {
             return const Center(child: CupertinoActivityIndicator());
           }
-          if (state.status == CharactersStatus.error) {
+          if (state.status == ViewState.error) {
             return const Center(child: Icon(Ionicons.refresh));
           }
-          if (state.status == CharactersStatus.success) {
+          if (state.status == ViewState.success) {
             return ListView(
               controller: scrollController,
               children: [

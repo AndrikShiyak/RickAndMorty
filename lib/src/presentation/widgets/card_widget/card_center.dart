@@ -16,7 +16,7 @@ class CardCenter extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -24,9 +24,7 @@ class CardCenter extends HookWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(height: 10),
         Text(center),
-        const SizedBox(height: 10),
         bottom,
       ],
     );

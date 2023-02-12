@@ -1,5 +1,5 @@
-import '../../core/params/get_character_params.dart';
-import '../../core/params/get_characters_params.dart';
+import '../../core/params/characters/get_character_params.dart';
+import '../../core/params/characters/get_characters_params.dart';
 import '../../core/resources/data_state.dart';
 import '../entities/character.dart';
 

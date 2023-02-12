@@ -1,10 +1,8 @@
 part of 'remote_characters_list_bloc.dart';
 
-enum CharactersStatus { initial, success, error, loading }
-
 class RemoteCharactersListState extends Equatable {
   const RemoteCharactersListState({
-    this.status = CharactersStatus.loading,
+    this.status = ViewState.loading,
     this.characters,
     this.character,
     this.noMoreData = false,
@@ -12,13 +10,13 @@ class RemoteCharactersListState extends Equatable {
 
   final List<Character>? characters;
   final Character? character;
-  final CharactersStatus status;
+  final ViewState status;
   final bool noMoreData;
 
   RemoteCharactersListState copyWith({
     List<Character>? characters,
     Character? character,
-    CharactersStatus? status,
+    ViewState? status,
     bool? noMoreData,
   }) {
     return RemoteCharactersListState(

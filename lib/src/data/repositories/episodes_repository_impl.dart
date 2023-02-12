@@ -2,23 +2,22 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:rick_and_morty_clean_practice/src/core/resources/data_state.dart';
-import 'package:rick_and_morty_clean_practice/src/domain/repositories/characters_repository.dart';
+import '../../core/params/episodes/get_episode_params.dart';
+import '../../core/params/episodes/get_episodes_params.dart';
+import '../../domain/entities/episode.dart';
+import '../../domain/repositories/episodes_repository.dart';
+import '../data_sources/remote/episodes/episodes_api.dart';
 
-import '../../core/params/characters/get_character_params.dart';
-import '../../core/params/characters/get_characters_params.dart';
-import '../../domain/entities/character.dart';
-import '../data_sources/remote/characters/characters_api.dart';
+class EpisodesRepositoryImpl implements EpisodesRepository {
+  final EpisodesApiService _episodesApiService;
 
-class CharactersRepositoryImpl implements CharactersRepository {
-  final CharactersApiService _charactersApiService;
-
-  CharactersRepositoryImpl(this._charactersApiService);
+  EpisodesRepositoryImpl(this._episodesApiService);
 
   @override
-  Future<DataState<Character>> getCharacter(GetCharacterParams params) async {
+  Future<DataState<Episode>> getEpisode(GetEpisodeParams params) async {
     try {
       final httpResponse =
-          await _charactersApiService.getCharacter(params.characterId);
+          await _episodesApiService.getEpisode(params.episodeId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data);
@@ -37,10 +36,9 @@ class CharactersRepositoryImpl implements CharactersRepository {
   }
 
   @override
-  Future<DataState<List<Character>>> getCharacters(
-      GetCharactersParams params) async {
+  Future<DataState<List<Episode>>> getEpisodes(GetEpisodesParams params) async {
     try {
-      final httpResponse = await _charactersApiService.getCharacters(
+      final httpResponse = await _episodesApiService.getEpisodes(
         params.page,
         params.options,
       );

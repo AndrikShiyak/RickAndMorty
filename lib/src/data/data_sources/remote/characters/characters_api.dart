@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:rick_and_morty_clean_practice/src/data/models/character_model.dart';
 
-import '../../models/characters_response_model.dart';
+import '../../../models/characters_response_model.dart';
 
 part 'characters_api.g.dart';
 

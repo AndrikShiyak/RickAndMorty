@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rick_and_morty_clean_practice/src/core/enums/view_state.dart';
-import '../../../core/params/get_character_params.dart';
+import '../../../core/params/characters/get_character_params.dart';
 import '../../../core/resources/data_state.dart';
 import '../../../domain/entities/character.dart';
 import '../../../domain/usecases/get_character_usecase.dart';
