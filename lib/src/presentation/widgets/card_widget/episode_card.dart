@@ -17,7 +17,7 @@ class EpisodeCard extends HookWidget {
   Widget build(BuildContext context) {
     return CardWidget(
       onTap: () => Navigator.of(context)
-          .pushNamed(AppRoutes.characterDetails, arguments: episode.id),
+          .pushNamed(AppRoutes.episodeDetails, arguments: episode.id),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: CardCenter(

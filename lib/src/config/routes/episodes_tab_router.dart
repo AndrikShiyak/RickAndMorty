@@ -18,7 +18,7 @@ class EpisodesTabRouter extends TabRouter {
 
       case AppRoutes.episodeDetails:
         return materialRoute(EpisodeDetailsPage(
-          characterId: settings.arguments as int,
+          episodeId: settings.arguments as int,
         ));
 
       default:
