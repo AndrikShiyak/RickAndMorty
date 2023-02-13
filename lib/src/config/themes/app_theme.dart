@@ -4,7 +4,7 @@ class AppTheme {
   static ThemeData get light {
     return ThemeData(
       appBarTheme: const AppBarTheme(
-        elevation: 0,
+        elevation: 1,
         color: Color.fromARGB(255, 255, 236, 67),
         foregroundColor: Colors.black,
       ),
@@ -36,8 +36,10 @@ class AppTheme {
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: Color.fromARGB(255, 132, 132, 132),
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Color.fromARGB(255, 255, 236, 67),
+        elevation: 10,
       ),
     );
   }
