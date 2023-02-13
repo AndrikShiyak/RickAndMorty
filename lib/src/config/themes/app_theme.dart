@@ -5,10 +5,10 @@ class AppTheme {
     return ThemeData(
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        color: Colors.white,
+        color: Color.fromARGB(255, 255, 236, 67),
         foregroundColor: Colors.black,
       ),
-      scaffoldBackgroundColor: const Color.fromARGB(255, 243, 243, 243),
+      scaffoldBackgroundColor: const Color.fromARGB(255, 255, 245, 154),
       primaryColor: Colors.black,
       colorScheme: const ColorScheme.light(secondary: Colors.black),
       splashColor: Colors.transparent,
@@ -28,8 +28,9 @@ class AppTheme {
         // overline: TextStyle(fontSize: 30),
       ),
       cardTheme: const CardTheme(
-        color: Color.fromARGB(255, 254, 243, 140),
-        elevation: 10,
+        color: Color.fromARGB(255, 255, 236, 67),
+        // elevation: 10,
+        elevation: 3,
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(),
       ),

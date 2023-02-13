@@ -20,21 +20,28 @@ class CharacterCard extends HookWidget {
     return CardWidget(
       onTap: () => Navigator.of(context)
           .pushNamed(AppRoutes.characterDetails, arguments: character.id),
-      indentation: 10,
-      left: CachedNetworkImageWidget(
-        imageUrl: character.image,
-        width: 100,
-      ),
-      center: CardCenter(
-        top: character.name,
-        center: character.species,
-        bottom: Row(
-          children: [
-            CharacterStatusWidget(status: character.status),
-            const SizedBox(width: 10),
-            Text(character.status),
-          ],
-        ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CachedNetworkImageWidget(
+            imageUrl: character.image,
+            width: 100,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: CardCenter(
+              top: character.name,
+              center: character.species,
+              bottom: Row(
+                children: [
+                  CharacterStatusWidget(status: character.status),
+                  const SizedBox(width: 10),
+                  Text(character.status),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

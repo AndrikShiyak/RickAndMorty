@@ -5,17 +5,12 @@ class CardWidget extends HookWidget {
   const CardWidget({
     super.key,
     required this.onTap,
-    this.left,
-    required this.center,
-    this.indentation,
+    required this.child,
   });
 
   final VoidCallback onTap;
 
-  final Widget? left;
-  final Widget center;
-
-  final double? indentation;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +20,7 @@ class CardWidget extends HookWidget {
         child: SizedBox(
           height: 100,
           width: double.infinity,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              left ?? const SizedBox(),
-              SizedBox(width: indentation),
-              Expanded(child: center),
-            ],
-          ),
+          child: child,
         ),
       ),
     );

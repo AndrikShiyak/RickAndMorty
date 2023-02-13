@@ -18,11 +18,13 @@ class EpisodeCard extends HookWidget {
     return CardWidget(
       onTap: () => Navigator.of(context)
           .pushNamed(AppRoutes.characterDetails, arguments: episode.id),
-      indentation: 10,
-      center: CardCenter(
-        top: episode.name!,
-        center: episode.episode!,
-        bottom: Text(episode.airDate ?? ''),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: CardCenter(
+          top: episode.name!,
+          center: episode.episode!,
+          bottom: Text(episode.airDate ?? ''),
+        ),
       ),
     );
   }
