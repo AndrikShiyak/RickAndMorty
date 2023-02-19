@@ -3,11 +3,11 @@ part of 'remote_character_details_bloc.dart';
 class RemoteCharacterDetailsState extends Equatable {
   const RemoteCharacterDetailsState({
     required this.status,
-    this.character,
+    required this.character,
   });
 
   final ViewState status;
-  final Character? character;
+  final Character character;
 
   RemoteCharacterDetailsState copyWith({
     Character? character,

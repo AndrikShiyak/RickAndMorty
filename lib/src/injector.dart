@@ -13,7 +13,6 @@ import 'data/repositories/episodes_repository_impl.dart';
 import 'domain/repositories/episodes_repository.dart';
 import 'domain/usecases/get_episode_usecase.dart';
 import 'domain/usecases/get_episodes_usecase.dart';
-import 'presentation/blocs/remote_character_details/remote_character_details_bloc.dart';
 import 'presentation/blocs/remote_characters_list/remote_characters_list_bloc.dart';
 import 'presentation/blocs/remote_episode_details/remote_episode_details_bloc.dart';
 
@@ -54,11 +53,6 @@ Future<void> initializeDependencies() async {
 
   injector.registerFactory<RemoteCharactersListBloc>(
     () => RemoteCharactersListBloc(injector()),
-  );
-  injector.registerFactory<RemoteCharacterDetailsBloc>(
-    () => RemoteCharacterDetailsBloc(
-      injector(),
-    ),
   );
 
   injector.registerFactory<RemoteEpisodesListBloc>(

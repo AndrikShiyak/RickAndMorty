@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_clean_practice/src/config/routes/tab_router.dart';
+import 'package:rick_and_morty_clean_practice/src/domain/entities/character.dart';
 import '../../presentation/pages/characters/character_details_page.dart';
 import '../../presentation/pages/characters/characters_list_page.dart';
 import 'app_routes.dart';
@@ -18,7 +19,7 @@ class CharactersTabRouter extends TabRouter {
 
       case AppRoutes.characterDetails:
         return materialRoute(CharacterDetailsPage(
-          characterId: settings.arguments as int,
+          character: settings.arguments as Character,
         ));
 
       default:

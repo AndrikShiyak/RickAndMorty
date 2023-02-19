@@ -2,8 +2,9 @@ import '../../domain/entities/character.dart';
 import 'location_model.dart';
 import 'origin_model.dart';
 
+// ignore: must_be_immutable
 class CharacterModel extends Character {
-  const CharacterModel({
+  CharacterModel({
     required super.id,
     required super.name,
     required super.status,

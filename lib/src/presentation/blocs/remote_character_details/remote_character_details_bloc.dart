@@ -1,41 +1,65 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty_clean_practice/src/core/enums/view_state.dart';
-import '../../../core/params/characters/get_character_params.dart';
+import '../../../core/params/episodes/get_episode_params.dart';
 import '../../../core/resources/data_state.dart';
 import '../../../domain/entities/character.dart';
-import '../../../domain/usecases/get_character_usecase.dart';
-
+import '../../../domain/entities/episode.dart';
+import '../../../domain/usecases/get_episode_usecase.dart';
 part 'remote_character_details_event.dart';
 part 'remote_character_details_state.dart';
 
 class RemoteCharacterDetailsBloc
     extends Bloc<RemoteCharacterDetailsEvent, RemoteCharacterDetailsState> {
-  final GetCharacterUseCase _getCharacterUseCase;
+  final GetEpisodeUseCase _getEpisodeUseCase;
+  final Character character;
 
-  RemoteCharacterDetailsBloc(this._getCharacterUseCase)
-      : super(const RemoteCharacterDetailsState(
+  RemoteCharacterDetailsBloc(
+    this._getEpisodeUseCase,
+    this.character,
+  ) : super(RemoteCharacterDetailsState(
           status: ViewState.loading,
+          character: character,
         )) {
-    on<GetCharacter>(_getCharacter);
+    on<LoadEpisodes>(_loadEpisodes);
   }
 
-  void _getCharacter(
-      GetCharacter event, Emitter<RemoteCharacterDetailsState> emit) async {
-    final dataState = await _getCharacterUseCase.call(
-        params: GetCharacterParams(event.characterId!));
-
-    if (dataState is DataSuccess) {
-      final character = dataState.data;
-
-      emit(state.copyWith(
-        character: character,
-        status: ViewState.success,
-      ));
-    }
+  Future<Episode?> _loadEpisode(int id) async {
+    final dataState =
+        await _getEpisodeUseCase.call(params: GetEpisodeParams(id));
 
     if (dataState is DataFailed) {
-      emit(state.copyWith(status: ViewState.error));
+      return null;
+    }
+
+    return dataState.data;
+  }
+
+  void _loadEpisodes(
+      LoadEpisodes event, Emitter<RemoteCharacterDetailsState> emit) async {
+    final character = state.character;
+
+    var episodes = <Episode?>[];
+
+    final episodesIds = <int>[];
+
+    if (character.episode.isNotEmpty) {
+      for (var episode in character.episode) {
+        final id = int.parse(episode.split('/').last);
+
+        episodesIds.add(id);
+      }
+
+      episodes = await Future.wait<Episode?>(
+          [for (var id in episodesIds) _loadEpisode(id)]);
+
+      character.setEpisodes = episodes;
+      emit(
+        state.copyWith(
+          status: ViewState.success,
+          character: character,
+        ),
+      );
     }
   }
 }

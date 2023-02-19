@@ -20,7 +20,7 @@ class LocationDetailsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RemoteCharacterDetailsBloc>(
-      create: (context) => injector()..add(GetCharacter(characterId)),
+      create: (context) => injector(),
       child: const LocationDetailsView(),
     );
   }

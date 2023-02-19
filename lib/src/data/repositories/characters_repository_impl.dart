@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:rick_and_morty_clean_practice/src/core/resources/data_state.dart';
 import 'package:rick_and_morty_clean_practice/src/domain/repositories/characters_repository.dart';
-
 import '../../core/params/characters/get_character_params.dart';
 import '../../core/params/characters/get_characters_params.dart';
 import '../../domain/entities/character.dart';

@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:rick_and_morty_clean_practice/src/domain/entities/episode.dart';
 
 import 'location.dart';
 import 'origin.dart';
 
+// ignore: must_be_immutable
 class Character extends Equatable {
   final int id;
   final String name;
@@ -16,8 +18,9 @@ class Character extends Equatable {
   final List<String> episode;
   final String url;
   final String created;
+  List<Episode?>? _episodes;
 
-  const Character({
+  Character({
     required this.id,
     required this.name,
     required this.status,
@@ -31,6 +34,14 @@ class Character extends Equatable {
     required this.url,
     required this.created,
   });
+
+  List<Episode?> get getEpisodes => _episodes ?? [];
+
+  set setEpisodes(List<Episode?> episodesList) {
+    if (_episodes != null && _episodes!.isNotEmpty) return;
+
+    _episodes = episodesList;
+  }
 
   Map<String, String> get infoMap => {
         'Name: ': name,

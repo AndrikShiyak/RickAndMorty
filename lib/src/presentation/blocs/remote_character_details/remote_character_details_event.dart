@@ -1,14 +1,12 @@
 part of 'remote_character_details_bloc.dart';
 
 abstract class RemoteCharacterDetailsEvent extends Equatable {
-  const RemoteCharacterDetailsEvent({this.characterId});
-
-  final int? characterId;
+  const RemoteCharacterDetailsEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class GetCharacter extends RemoteCharacterDetailsEvent {
-  const GetCharacter(int characterId) : super(characterId: characterId);
+class LoadEpisodes extends RemoteCharacterDetailsEvent {
+  const LoadEpisodes() : super();
 }

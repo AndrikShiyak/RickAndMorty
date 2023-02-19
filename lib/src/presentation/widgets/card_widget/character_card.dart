@@ -19,7 +19,7 @@ class CharacterCard extends HookWidget {
   Widget build(BuildContext context) {
     return CardWidget(
       onTap: () => Navigator.of(context)
-          .pushNamed(AppRoutes.characterDetails, arguments: character.id),
+          .pushNamed(AppRoutes.characterDetails, arguments: character),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

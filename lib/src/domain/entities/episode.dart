@@ -1,5 +1,3 @@
-import 'character.dart';
-
 class Episode {
   final int? id;
   final String? name;
@@ -8,7 +6,6 @@ class Episode {
   final String? created;
   final String? episode;
   final List<String>? characters;
-  List<Character> characterDtoList = [];
 
   Episode({
     required this.id,
