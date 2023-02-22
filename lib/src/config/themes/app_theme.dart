@@ -34,6 +34,10 @@ class AppTheme {
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(),
       ),
+      listTileTheme: const ListTileThemeData(
+        contentPadding: EdgeInsets.zero,
+        enableFeedback: true,
+      ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.black,
         unselectedItemColor: Color.fromARGB(255, 132, 132, 132),

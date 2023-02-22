@@ -5,9 +5,11 @@ import 'package:rick_and_morty_clean_practice/src/injector.dart';
 import 'package:rick_and_morty_clean_practice/src/presentation/blocs/remote_character_details/remote_character_details_bloc.dart';
 import '../../../core/enums/view_state.dart';
 import '../../../domain/entities/character.dart';
-import '../../../domain/entities/episode.dart';
 import '../../widgets/cached_network_image_widget.dart';
+import '../../widgets/character_status_widget.dart';
 import '../../widgets/key_value_widget.dart';
+import '../../widgets/list_tile/episode_list_tile.dart';
+import '../../widgets/list_tile/error_list_tile.dart';
 
 class CharacterDetailsPage extends HookWidget {
   const CharacterDetailsPage({
@@ -38,9 +40,6 @@ class CharacterDetailsView extends HookWidget {
       builder: (_, state) {
         final Character character = state.character;
 
-        // return StatePage(
-        //   state: state.status,
-        //   child:
         return Scaffold(
           appBar: AppBar(
             title: Text(character.name),
@@ -55,15 +54,34 @@ class CharacterDetailsView extends HookWidget {
                 ),
                 const SizedBox(height: 20),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (var info in character.infoMap.entries.toList()) ...[
-                      KeyValueWidget(
-                        keyText: info.key,
-                        valueText: info.value,
-                      ),
-                      const SizedBox(height: 10),
-                    ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CharacterStatusWidget(
+                          status: character.status,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          character.status,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                      ],
+                    ),
+                    KeyValueWidget(
+                      keyText: 'Species:',
+                      valueText: character.species,
+                    ),
+                    KeyValueWidget(
+                      keyText: 'Gender:',
+                      valueText: character.gender,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Locations',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    const SizedBox(height: 10),
                     Text(
                       'Episodes',
                       style: Theme.of(context).textTheme.headline6,
@@ -78,35 +96,27 @@ class CharacterDetailsView extends HookWidget {
                             child: CircularProgressIndicator(),
                           )
                         else if (state.status == ViewState.success)
-                          for (Episode? episode in character.getEpisodes)
-                            // Text(episode.name ?? ''),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final episode = character.getEpisodes[index];
 
-                            if (episode != null)
-                              Container(
-                                color: Colors.yellow,
-                                child: ListTile(
-                                  contentPadding: EdgeInsets.zero,
-                                  minVerticalPadding: 0,
-                                  title: Text(episode.name ?? ''),
-                                  trailing: Icon(Icons.arrow_forward_ios),
-                                  onTap: () {
-                                    print('sadasda ${episode.id}');
-                                  },
-                                ),
-                              )
-                            else
-                              Container(
-                                color: Colors.red,
-                                child: ListTile(
-                                  contentPadding: EdgeInsets.zero,
-                                  minVerticalPadding: 0,
-                                  title: Text(episode?.name ?? ''),
-                                  trailing: Icon(Icons.arrow_forward_ios),
-                                  onTap: () {
-                                    print('sadasda ${episode?.id}');
-                                  },
-                                ),
-                              ),
+                              if (episode != null) {
+                                return EpisodeListTile(
+                                  episode: episode,
+                                );
+                              }
+
+                              return const ErrorListTile();
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider(
+                                height: 1,
+                              );
+                            },
+                            itemCount: character.getEpisodes.length,
+                          ),
                       ],
                     )
                   ],

@@ -17,15 +17,16 @@ class KeyValueWidget extends HookWidget {
       children: [
         Text(
           keyText,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
-        const SizedBox(width: 10),
         if (valueText != null)
           Expanded(
             child: Text(
               valueText!,
               maxLines: 2,
+              style: Theme.of(context).textTheme.subtitle1,
               overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.end,
             ),
           ),
       ],
