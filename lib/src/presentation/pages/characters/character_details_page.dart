@@ -10,6 +10,7 @@ import '../../widgets/character_status_widget.dart';
 import '../../widgets/key_value_widget.dart';
 import '../../widgets/list_tile/episode_list_tile.dart';
 import '../../widgets/list_tile/error_list_tile.dart';
+import '../../widgets/list_tile/location_list_tile.dart';
 
 class CharacterDetailsPage extends HookWidget {
   const CharacterDetailsPage({
@@ -81,6 +82,14 @@ class CharacterDetailsView extends HookWidget {
                       'Locations',
                       style: Theme.of(context).textTheme.headline6,
                     ),
+                    const SizedBox(height: 10),
+                    LocationListTile(
+                        keyText: 'Last Known Location',
+                        valueText: character.origin.name),
+                    const Divider(height: 1),
+                    LocationListTile(
+                        keyText: 'Location',
+                        valueText: character.location.name),
                     const SizedBox(height: 10),
                     Text(
                       'Episodes',
